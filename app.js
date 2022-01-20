@@ -1,23 +1,43 @@
+const data = {
+    users: [
+        {
+            id: 1,
+            age: 23,
+            name: "Johan"
+        },
+        {
+            id: 2,
+            age: 43,
+            name: "Theo"
+        },
+        {
+            id: 3,
+            age: 73,
+            name: "Mirinda"
+        }
+    ]
+}
+
 
 const Item = (props) => {
-    return(
-        <li>{`fruit: ${props.content}`}</li>
+    return (
+        <div>
+            <h1>{`User: ${props.user.name}`}</h1>
+            <h2>{`Age: ${props.user.age}`}</h2>
+        </div>
     )
 }
 
 class ListItems extends React.Component {
 
-    state = {
-        items: ["apple", "pear", "prune"],
-    }
-
-    
     render() {
-        const Items = this.state.items.map(item => <Item key={item} content={item}/>);
+        
+        const users = this.props.data.users;
+        const Items = users.map(user => <Item key={user.id} user={user} />);
         return (
-            <ul>  
+            <>
                 {Items}
-            </ul>
+            </>
         )
     }
 }
@@ -28,4 +48,4 @@ class ListItems extends React.Component {
 
 
 
-ReactDOM.render(<React.StrictMode><ListItems /></React.StrictMode>, document.getElementById("root"));
+ReactDOM.render(<React.StrictMode><ListItems data={data} /></React.StrictMode>, document.getElementById("root"));
